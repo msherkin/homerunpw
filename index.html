@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home Run Power Washing</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!--
+  ═══════════════════════════════════════════════════════════════
+  SETUP INSTRUCTIONS
+  ═══════════════════════════════════════════════════════════════
+
+  1. CONTACT FORM (Formspree)
+     - Go to https://formspree.io and create a free account
+     - Create a new form and copy your Form ID (looks like "xpwzabcd")
+     - Replace YOUR_FORMSPREE_ID below with your actual Form ID
+
+  2. CAPTCHA (hCaptcha - free, no credit card required)
+     - Go to https://www.hcaptcha.com and create a free account
+     - Add your site and copy your Site Key
+     - Replace YOUR_HCAPTCHA_SITE_KEY below with your actual key
+     - In your hCaptcha dashboard, add your Formspree endpoint to allowed origins
+
+  ═══════════════════════════════════════════════════════════════
+  -->
+
+  <!-- hCaptcha -->
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy-dark:  #0D1B4B;
+      --navy:       #1A3A7B;
+      --blue-mid:   #2E6DB4;
+      --blue-light: #6BB5E0;
+      --blue-pale:  #D0E9F8;
+      --white:      #FFFFFF;
+      --red:        #CC1122;
+      --gray:       #F4F7FB;
+      --text:       #1A1A2E;
+      --text-muted: #5a6a85;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--navy-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 2rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 48px;
+      width: auto;
+    }
+
+    .nav-logo span {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.15rem;
+      color: var(--white);
+      line-height: 1.2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-logo span em {
+      font-style: normal;
+      color: var(--blue-light);
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--blue-pale);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--blue-light);
+      color: var(--navy-dark) !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 55%, var(--blue-mid) 100%);
+      color: var(--white);
+      padding: 6rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .hero img.hero-logo {
+      width: 180px;
+      height: auto;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 4px 24px rgba(0,0,0,0.4));
+    }
+
+    .hero h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 span { color: var(--blue-light); }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--blue-pale);
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .badge {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 100px;
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2.2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+
+    .btn-primary {
+      background: var(--blue-light);
+      color: var(--navy-dark);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.5);
+      color: var(--white);
+      margin-left: 0.75rem;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2rem; }
+
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue-mid);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: var(--navy-dark);
+      text-transform: uppercase;
+      line-height: 1.15;
+    }
+
+    .section-sub {
+      color: var(--text-muted);
+      margin-top: 0.75rem;
+      max-width: 520px;
+      font-size: 1rem;
+    }
+
+    /* ── WHY US ── */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .why-card {
+      background: var(--gray);
+      border-radius: 12px;
+      padding: 1.75rem 1.5rem;
+      border-top: 4px solid var(--blue-light);
+    }
+
+    .why-card .icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .why-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      color: var(--navy-dark);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .why-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    /* ── PRICING ── */
+    #pricing { background: var(--gray); }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+
+    .price-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(13,27,75,0.08);
+      border: 2px solid transparent;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .price-card:hover {
+      border-color: var(--blue-light);
+      transform: translateY(-4px);
+    }
+
+    .price-card .service-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .price-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .price-card .price {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--navy-dark);
+      font-family: 'Oswald', sans-serif;
+    }
+
+    .price-card .price sub {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .price-card .price-note {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 0.35rem;
+    }
+
+    /* Bundles */
+    .bundles-heading {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      color: var(--navy-dark);
+      text-transform: uppercase;
+      margin: 3.5rem 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .bundles-heading::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: var(--blue-pale);
+    }
+
+    .bundles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .bundle-card {
+      background: var(--navy-dark);
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bundle-card::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: rgba(107,181,224,0.12);
+    }
+
+    .bundle-card.featured {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--blue-mid) 100%);
+      border: 2px solid var(--blue-light);
+    }
+
+    .bundle-card .bundle-badge {
+      position: absolute;
+      top: 0.75rem; right: 0.75rem;
+      background: var(--blue-light);
+      color: var(--navy-dark);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      text-transform: uppercase;
+    }
+
+    .bundle-card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+
+    .bundle-card .includes {
+      font-size: 0.85rem;
+      color: var(--blue-pale);
+      line-height: 1.5;
+      margin-top: 0.5rem;
+    }
+
+    .bundle-card .bundle-cta {
+      display: inline-block;
+      margin-top: 1.25rem;
+      padding: 0.45rem 1.2rem;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 100px;
+      font-size: 0.82rem;
+      color: var(--white);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .bundle-card .bundle-cta:hover { background: rgba(255,255,255,0.25); }
+
+    .bundle-card.featured .bundle-cta {
+      background: var(--blue-light);
+      border-color: var(--blue-light);
+      color: var(--navy-dark);
+      font-weight: 600;
+    }
+    .bundle-card.featured .bundle-cta:hover { background: var(--white); }
+
+    .pricing-note {
+      margin-top: 2rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--blue-pale);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--white); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: start;
+      max-width: 680px;
+    }
+
+    .contact-info h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      color: var(--navy-dark);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-info p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.92rem;
+    }
+
+    .contact-detail .detail-icon {
+      width: 38px; height: 38px;
+      background: var(--blue-pale);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-detail strong { display: block; font-size: 0.78rem; color: var(--text-muted); }
+    .contact-detail span { color: var(--navy-dark); font-weight: 500; }
+
+    form {
+      background: var(--gray);
+      border-radius: 16px;
+      padding: 2.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.1rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.03em;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1.5px solid #D8E4F0;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.92rem;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--blue-light);
+      box-shadow: 0 0 0 3px rgba(107,181,224,0.2);
+    }
+
+    textarea { resize: vertical; min-height: 110px; }
+
+    .h-captcha { margin: 0.75rem 0; }
+
+    .form-submit {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--navy-dark);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 0.5rem;
+    }
+
+    .form-submit:hover {
+      background: var(--navy);
+      transform: translateY(-1px);
+    }
+
+    .form-disclaimer {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 0.75rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-dark);
+      color: var(--blue-pale);
+      text-align: center;
+      padding: 2.5rem 2rem;
+    }
+
+    footer img {
+      height: 60px;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
+    footer p {
+      font-size: 0.85rem;
+      color: rgba(208,233,248,0.6);
+    }
+
+    footer .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      list-style: none;
+      margin: 1rem 0;
+    }
+
+    footer .footer-links a {
+      color: var(--blue-pale);
+      text-decoration: none;
+      font-size: 0.85rem;
+      opacity: 0.75;
+    }
+    footer .footer-links a:hover { opacity: 1; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0.6rem 1rem; }
+      .nav-links { display: none; }
+
+      .hero { padding: 4rem 1.25rem 3.5rem; }
+      .hero img.hero-logo { width: 140px; }
+
+      section { padding: 3.5rem 1.25rem; }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      form { padding: 1.5rem; }
+    }
+
+    @media (max-width: 480px) {
+      .btn-outline { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════ NAV ════════ -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="logo.png" alt="Home Run Power Washing Logo" />
+      <span>Home Run<em>Power Washing</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+    </ul>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <img src="logo.png" alt="Home Run Power Washing" class="hero-logo" />
+      <h1>Knock It Out<br /><span>Of the Park</span></h1>
+      <p>Power washing that makes your driveways, decks, and porches look brand new — at prices that hit it out of the park.</p>
+
+      <div class="hero-badges">
+        <span class="badge">🇨🇦 Proudly Canadian</span>
+<span class="badge">💧 Eco-Friendly</span>
+        <span class="badge">⚡ Fast & Reliable</span>
+      </div>
+
+      <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+      <a href="#pricing" class="btn btn-outline">See Pricing</a>
+    </div>
+  </section>
+
+  <!-- ════════ WHY US ════════ -->
+  <section id="why">
+    <div class="container">
+      <div class="section-label">Why Choose Us</div>
+      <div class="section-title">We Take Pride in Every Job</div>
+      <p class="section-sub">We treat your property like it's our own — because a clean home is a happy home.</p>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="icon">💧</div>
+          <h3>High-Pressure Clean</h3>
+          <p>High-pressure equipment that blasts away years of dirt, grime, and algae.</p>
+        </div>
+        <div class="why-card">
+          <div class="icon">🎯</div>
+          <h3>Attention to Detail</h3>
+          <p>We don't cut corners — every inch is cleaned to perfection before we call it done.</p>
+        </div>
+        <div class="why-card">
+          <div class="icon">⏱️</div>
+          <h3>Quick Turnaround</h3>
+          <p>Most jobs completed in a single visit. We respect your time and your schedule.</p>
+        </div>
+        <div class="why-card">
+          <div class="icon">💰</div>
+          <h3>Fair Prices</h3>
+          <p>Transparent, upfront pricing — no hidden fees or surprise charges.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ PRICING ════════ -->
+  <section id="pricing">
+    <div class="container">
+      <div class="section-label">Pricing</div>
+      <div class="section-title">Simple, Upfront Rates</div>
+      <p class="section-sub">No guessing — here's exactly what you'll pay. Bundle and save!</p>
+
+      <!-- Individual Services -->
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="service-icon">🚗</div>
+          <h3>Single Car Driveway</h3>
+          <div class="price">$75</div>
+          <div class="price-note">Standard single-car driveway</div>
+        </div>
+
+        <div class="price-card">
+          <div class="service-icon">🚙</div>
+          <h3>Double Car Driveway</h3>
+          <div class="price">$100</div>
+          <div class="price-note">Full double-wide driveway</div>
+        </div>
+
+        <div class="price-card">
+          <div class="service-icon">🪵</div>
+          <h3>Deck or Porch</h3>
+          <div class="price">from $50</div>
+          <div class="price-note">Priced by size — ask for a quote</div>
+        </div>
+
+        <div class="price-card">
+          <div class="service-icon">🗑️</div>
+          <h3>Garbage Can</h3>
+          <div class="price">$20<sub>/each</sub></div>
+          <div class="price-note">Per garbage or recycling can</div>
+        </div>
+
+        <div class="price-card">
+          <div class="service-icon">💬</div>
+          <h3>Other Services</h3>
+          <div class="price" style="font-size:1.4rem;">Upon Request</div>
+          <div class="price-note">Contact us for a custom quote</div>
+        </div>
+      </div>
+
+      <div class="pricing-note">
+        💡 <strong>Not sure what you need?</strong>&nbsp; Reach out and we'll give you a free estimate based on your property.
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CONTACT ════════ -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-label">Contact</div>
+      <div class="section-title">Get a Free Quote</div>
+      <p class="section-sub">Fill out the form and we'll get back to you quickly — usually the same day.</p>
+
+      <!-- FORM -->
+        <!--
+          ACTION: Replace "YOUR_FORMSPREE_ID" with your Formspree form ID
+          Example: action="https://formspree.io/f/xpwzabcd"
+        -->
+        <form
+          action="https://formspree.io/f/YOUR_FORMSPREE_ID"
+          method="POST"
+          id="inquiry-form"
+        >
+          <input type="hidden" name="_subject" value="New Power Washing Inquiry" />
+          <input type="text" name="_gotcha" style="display:none" />
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name *</label>
+              <input type="text" id="fname" name="first_name" required placeholder="Jane" />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name *</label>
+              <input type="text" id="lname" name="last_name" required placeholder="Smith" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required placeholder="jane@email.com" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="service">Service(s) Interested In *</label>
+            <select id="service" name="service" required>
+              <option value="" disabled selected>Select a service…</option>
+              <option>Single Car Driveway ($75)</option>
+              <option>Double Car Driveway ($100)</option>
+              <option>Deck / Porch (from $50)</option>
+              <option>Garbage Can(s) ($20/each)</option>
+              <option>Other / Not Sure</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Street Address / Neighbourhood</label>
+            <input type="text" id="address" name="address" placeholder="123 Main St or Oak Park area" />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Additional Details</label>
+            <textarea id="message" name="message" placeholder="Any other info — driveway size, stains, preferred dates, etc."></textarea>
+          </div>
+
+          <!--
+            hCaptcha: Replace "YOUR_HCAPTCHA_SITE_KEY" with your actual site key
+            from https://dashboard.hcaptcha.com
+          -->
+          <div class="h-captcha" data-sitekey="YOUR_HCAPTCHA_SITE_KEY"></div>
+
+          <button type="submit" class="form-submit">Send My Inquiry ⚾</button>
+          <p class="form-disclaimer">We respect your privacy and will never share your information.</p>
+        </form>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer>
+    <img src="logo.png" alt="Home Run Power Washing" />
+    <ul class="footer-links">
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <p>&copy; 2026 Home Run Power Washing. All rights reserved.</p>
+    <p style="margin-top:0.35rem;">Serving our local community with pride. 🇨🇦</p>
+  </footer>
+
+</body>
+</html>
